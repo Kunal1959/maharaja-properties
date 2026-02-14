@@ -1,1 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maharaja Agrasen Properties · digital blueprint</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font: Inter (clean, luxury friendly) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f1a;
+            color: #e5e9f0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* gold & dark palette */
+        :root {
+            --bg-deep: #0a0e17;
+            --card-bg: #131a28;
+            --gold: #d4af37;
+            --gold-soft: #c9a53d;
+            --gold-dim: #a88932;
+            --border-glow: rgba(212, 175, 55, 0.25);
+            --text-light: #f0f4fa;
+            --text-muted: #b0b9cc;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            border-left: 6px solid var(--gold);
+            padding-left: 1.2rem;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* gold accents */
+        .gold-text {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* header / hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero .subhead {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* problem / solution cards */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .card-problem, .card-solution {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 2rem 2rem 2.2rem;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.7);
+            transition: transform 0.2s ease;
+        }
+
+        .card-problem:hover, .card-solution:hover {
+            border-color: var(--gold-dim);
+            transform: translateY(-4px);
+        }
+
+        .card-problem h3 i, .card-solution h3 i {
+            margin-right: 12px;
+            color: var(--gold);
+        }
+
+        .problem-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .problem-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #cfd7e6;
+        }
+
+        .problem-list li i {
+            color: #b34a4a;
+            font-size: 1.3rem;
+            min-width: 24px;
+        }
+
+        .solution-list li i {
+            color: var(--gold);
+        }
+
+        /* features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0 4rem;
+        }
+
+        .feature-item {
+            background: rgba(19, 26, 40, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 1.8rem 1rem;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid var(--border-glow);
+            transition: all 0.2s;
+        }
+
+        .feature-item i {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* pricing cards (3 plans) */
+        .pricing-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0 2rem;
+        }
+
+        .pricing-card {
+            flex: 1 1 280px;
+            max-width: 350px;
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 2rem 1.6rem 1.8rem;
+            border: 1px solid #2a3442;
+            box-shadow: 0 20px 30px -10px black;
+            transition: 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.recommended {
+            border: 2px solid var(--gold);
+            transform: scale(1.02);
+            background: #141e2f;
+            box-shadow: 0 25px 40px -12px #d4af3740;
+        }
+
+        .recommended-tag {
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            background: var(--gold);
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.3rem 1.4rem;
+            border-radius: 40px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(212,175,55,0.5);
+        }
+
+        .plan-name {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .plan-type {
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            border-bottom: 1px dashed #334153;
+            padding-bottom: 0.7rem;
+        }
+
+        .price-tag {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .price-tag small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .feature-list {
+            list-style: none;
+            flex: 1;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #d0d9ea;
+        }
+
+        .feature-list li i.fa-check-circle {
+            color: var(--gold);
+            font-size: 1.3rem;
+            min-width: 24px;
+        }
+
+        .feature-list li .feature-label {
+            font-weight: 500;
+            color: #b3c0d6;
+            margin-right: 4px;
+        }
+
+        .btn-gold {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-weight: 700;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 1.8rem;
+            width: 100%;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold);
+            color: #0b0f1a;
+        }
+
+        .pricing-card.recommended .btn-gold {
+            background: var(--gold);
+            color: #0b0f1a;
+            border: 2px solid var(--gold);
+        }
+
+        .pricing-card.recommended .btn-gold:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        /* footer CTA */
+        .cta-footer {
+            margin-top: 5rem;
+            text-align: center;
+            background: linear-gradient(145deg, #0d1421, #0a0e17);
+            padding: 3rem 2rem;
+            border-radius: 70px 70px 30px 30px;
+            border: 1px solid #2f3b4e;
+        }
+
+        .cta-footer p {
+            font-size: 1.8rem;
+            font-weight: 500;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            line-height: 1.4;
+        }
+
+        .signature {
+            color: var(--gold);
+            font-weight: 400;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-top: 2rem;
+        }
+
+        hr {
+            border: 1px solid #1f293d;
+            margin: 2rem 0;
+        }
+
+        /* responsive */
+        @media (max-width: 800px) {
+            h1 { font-size: 2.2rem; }
+            .split-grid { grid-template-columns: 1fr; }
+            .pricing-card.recommended { transform: scale(1); }
+            .cta-footer p { font-size: 1.5rem; }
+        }
+        @media (max-width: 500px) {
+            .container { padding: 1.5rem 1rem; }
+            .feature-item { padding: 1.2rem; }
+        }
+
+        /* small icon tweaks */
+        .gold-i {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero / header -->
+        <div class="hero">
+            <h1>Elevating the Digital Identity of<br>Maharaja Agrasen Properties Pvt. Ltd.</h1>
+            <div class="subhead">
+                Transforming your website into a Premium Real Estate Engine that generates leads 24/7.
+            </div>
+            <div class="badge">✦ GREATER NOIDA · ALPHA-1 · YAMUNA EXPY ✦</div>
+        </div>
+
+        <!-- Problem vs Solution (two cards) -->
+        <div class="split-grid">
+            <div class="card-problem">
+                <h3><i class="fas fa-exclamation-triangle gold-i"></i> Current State</h3>
+                <ul class="problem-list">
+                    <li><i class="fas fa-times-circle"></i> <strong>Outdated UI</strong> – hard to navigate on mobile, slow loading</li>
+                    <li><i class="fas fa-times-circle"></i> <strong>Lost premium buyers</strong> – 95% users on phone, site not optimised</li>
+                    <li><i class="fas fa-times-circle"></i> <strong>No smart filters</strong> – customers can't find ‘Yamuna plots’ or ‘Kisan quota’ easily</li>
+                    <li><i class="fas fa-times-circle"></i> <strong>Weak lead capture</strong> – no direct WhatsApp from property view</li>
+                </ul>
+            </div>
+            <div class="card-solution">
+                <h3><i class="fas fa-gem gold-i"></i> DeepLink Solution</h3>
+                <ul class="problem-list solution-list">
+                    <li><i class="fas fa-check-circle gold-i"></i> <strong>Ultra‑fast mobile experience</strong> – like a premium app</li>
+                    <li><i class="fas fa-check-circle gold-i"></i> <strong>Advanced ‘Smart Search’</strong> – filter by budget, BHK, location (Alpha, Yamuna, etc.)</li>
+                    <li><i class="fas fa-check-circle gold-i"></i> <strong>HD gallery & videos</strong> – zoom, walkthroughs, instant feel</li>
+                    <li><i class="fas fa-check-circle gold-i"></i> <strong>1‑click WhatsApp lead</strong> – “interested in this plot” lands directly to your phone</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features highlight (icon row) -->
+        <h2>Key features of your new portal</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-building"></i>
+                <h4>Dynamic Listings</h4>
+                <p>Add/remove properties instantly, HD images & video tours</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-sliders-h"></i>
+                <h4>Smart Filter Search</h4>
+                <p>Yamuna Plots, Alpha Villas, Commercial – instant results</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>100% Mobile Responsive</h4>
+                <p>Feels like a custom app on every device</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-whatsapp"></i>
+                <h4>Automated Lead Capture</h4>
+                <p>WhatsApp & email integrated on every property</p>
+            </div>
+        </div>
+
+        <!-- 3‑Plan Strategy (core pricing table) -->
+        <h2>Choose your digital edge <span style="font-size: 1rem; font-weight: 400; color: var(--text-muted); margin-left: 15px;">premium plans for premium brand</span></h2>
+        <div class="pricing-row">
+            <!-- PLAN 1 – Basic / Corporate Identity -->
+            <div class="pricing-card">
+                <div class="plan-name">The Corporate Identity</div>
+                <div class="plan-type">Basic · trust & image</div>
+                <div class="price-tag">₹15k – 18k <small>estimated</small></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Best for:</span> Brand image, trust</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Website:</span> 5-7 page premium corporate</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Listings:</span> Static (manual upload by us)</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Search filters:</span> Basic categories</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Lead gen:</span> Contact form + WhatsApp button</li>
+                </ul>
+                <button class="btn-gold">Request proposal</button>
+            </div>
+
+            <!-- PLAN 2 – Lead Engine (recommended) -->
+            <div class="pricing-card recommended">
+                <div class="recommended-tag">⚡ RECOMMENDED</div>
+                <div class="plan-name">The Lead Engine</div>
+                <div class="plan-type">Active selling · lead gen</div>
+                <div class="price-tag">₹28k – 35k <small>estimated</small></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Best for:</span> Active property selling</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Website:</span> Dynamic Property Portal (MagicBricks‑lite)</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Listings:</span> Dynamic Dashboard – you add/edit yourself</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Search filters:</span> Advanced (area, budget, BHK, type)</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Lead gen:</span> Individual WhatsApp on EVERY property</li>
+                </ul>
+                <button class="btn-gold">Get this engine</button>
+            </div>
+
+            <!-- PLAN 3 – Market Dominator -->
+            <div class="pricing-card">
+                <div class="plan-name">Market Dominator</div>
+                <div class="plan-type">Full automation · SEO</div>
+                <div class="price-tag">₹50k+ <small>investment</small></div>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Best for:</span> Full agency automation & SEO</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Website:</span> Advanced Portal + ad landing pages</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Listings:</span> Unlimited + featured 'Hot Properties' slider</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Search filters:</span> Map integration + advanced smart search</li>
+                    <li><i class="fas fa-check-circle"></i> <span class="feature-label">Lead gen:</span> CRM integration (leads → Google Sheet)</li>
+                </ul>
+                <button class="btn-gold">Dominate now</button>
+            </div>
+        </div>
+
+        <!-- subtle footnote: pricing includes everything -->
+        <p style="text-align: center; color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+            <i class="fas fa-shield-alt gold-i" style="margin-right: 6px;"></i>All plans include custom UI, luxury finish, and 24/7 hosting support
+        </p>
+
+        <!-- divider -->
+        <hr>
+
+        <!-- Footer CTA -->
+        <div class="cta-footer">
+            <p>Ready to make Maharaja Agrasen Properties the most digitally trusted real estate brand in Greater Noida?</p>
+            <p style="font-size: 1.3rem; color: var(--gold); margin: 0.5rem 0;">Let's build it.</p>
+            <div style="margin: 2rem 0 1rem;">
+                <span style="background: #1f2a3a; padding: 0.7rem 2rem; border-radius: 60px; color: white; border: 1px solid var(--gold-dim);">
+                    <i class="fas fa-phone-alt gold-i"></i> +91 98712 34567  ·  <i class="fas fa-envelope gold-i"></i> elevate@deeplink.in
+                </span>
+            </div>
+            <div class="signature">——  DeepLink Creators  ——</div>
+            <div style="color: #62748c; margin-top: 1.5rem; font-size: 0.95rem;">Elevating real estate digital identity · Alpha-1, Greater Noida</div>
+        </div>
+
+        <!-- tiny JS: just to make buttons interactive (console.log / simulate click) but we keep it subtle -->
+        <script>
+            (function() {
+                // Add a gentle alert to demo call to action (can be removed, but shows interactivity)
+                const buttons = document.querySelectorAll('.btn-gold');
+                for (let btn of buttons) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const plan = this.closest('.pricing-card')?.querySelector('.plan-name')?.innerText || 'selected plan';
+                        alert(`Thank you for your interest in ${plan}. Our team will reach out within 2 hours to schedule a meeting.`);
+                    });
+                }
+                // also contact footer
+                const footerContact = document.querySelector('.cta-footer span');
+                if (footerContact) {
+                    footerContact.style.cursor = 'pointer';
+                    footerContact.addEventListener('click', () => {
+                        alert('📞 Connect directly: +91 98712 34567 or email elevate@deeplink.in');
+                    });
+                }
+            })();
+        </script>
+        <!-- note: all prices & features are as discussed – tailor‑made for Maharaja Agrasen Properties Pvt. Ltd. -->
+    </div>
+</body>
+  </html>
